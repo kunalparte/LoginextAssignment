@@ -1,0 +1,249 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf600
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fswiss\fcharset0 Helvetica-Bold;\f2\fnil\fcharset0 HelveticaNeue;
+\f3\fnil\fcharset0 HelveticaNeue-Bold;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww33400\viewh21000\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 							LogiNNextAssignmentDoc\
+\
+\
+
+\f1\b\fs28 Project Setup requires -\
+\
+
+\f0\b0\fs24 - Android studio\
+- kotlin Plugins installed\
+\
+\
+\
+
+\f1\b\fs30 Deoendencies
+\fs26 -\
+
+\f0\b0\fs24 \
+
+\f1\b\fs26  Project level Gradle file -\
+
+\f0\b0\fs24 - com.android.application-v7.3.0 and com.android.library:7.3.0w hich indicates \'91com.android.tools.build-gradle:7.3.0\'92.\
+- org.jetbrains.kotlin.android:1.6.20 which indicates to org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.20.\
+\
+\
+
+\f1\b\fs26 Module Level Dependencies-\
+\
+\pard\pardeftab560\slleading20\pardirnatural\partightenfactor0
+
+\f2\b0\fs24 \cf0 /*Dagger dependencies*/\
+def daggerVersion = "2.35.1"\
+implementation "com.google.dagger:dagger-android:$daggerVersion"\
+implementation "com.google.dagger:dagger-android-support:$daggerVersion"\
+kapt "com.google.dagger:dagger-compiler:$daggerVersion"\
+kapt "com.google.dagger:dagger-android-processor:$daggerVersion"\
+implementation 'javax.inject:javax.inject:1'\
+kapt "org.jetbrains.kotlinx:kotlinx-metadata-jvm:0.3.0"\
+implementation "androidx.compose.runtime:runtime:1.2.1"\
+\
+\
+/*Glide Dependencies*/\
+implementation 'com.github.bumptech.glide:glide:4.13.2'\
+annotationProcessor 'com.github.bumptech.glide:compiler:4.13.2'\
+\
+// ViewModel and LiveData\
+def lifecycle_version = '2.2.0-alpha03'\
+implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"\
+\
+// Retrofit\
+def retrofitVersion = "2.5.0"\
+implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"\
+implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"\
+\
+// RxJava\
+def rxjava_version = '2.1.1'\
+implementation "io.reactivex.rxjava2:rxjava:$rxjava_version"\
+\
+// Rx-Retrofit Call Adapter\
+def rxcalladapter_version = '2.5.0'\
+implementation "com.squareup.retrofit2:adapter-rxjava2:$rxcalladapter_version" // Retrofit call adapter\
+\
+// Reactive Streams (convert Observable to LiveData)\
+def reactivestreams_version = "1.1.1"\
+implementation "android.arch.lifecycle:reactivestreams:$reactivestreams_version"\
+\
+// architecture comp. navigation\
+def nav_version = "2.5.1"\
+implementation "androidx.navigation:navigation-fragment:$nav_version"\
+implementation "androidx.navigation:navigation-ui:$nav_version"\
+implementation "androidx.navigation:navigation-runtime:$nav_version"\
+\
+\
+
+\f3\b\fs30 \
+
+\fs28 Dagger Annotations Used in Project-\
+
+\fs26 \
+
+\f2\b0 @Singleton annotation
+\fs24  - Baseically a scoping annotation that lets dagger know that the\
+particular object will persist in memory through out application lifetime. It states \
+dependencies in AppComponent will have their instances in memory throughout application lifetime.\
+Here annotating AppComponent with @Singleton annotation means the class annotated owns the Singleton scope.\
+\
+\
+
+\fs26 @Component-
+\fs24  to let dagger an d code generator know is a component class\
+
+\f3\b\fs26 \
+
+\f2\b0 @BindsInstance
+\fs24 - BindInstance is an method to bind a particular object or instance of an object to\
+the component at the time of its construction. When constructing a component using @BindInstance and the object passed to constructor to the Builder will be available to the modules associated with the component\
+\
+\pard\pardeftab560\slleading20\partightenfactor0
+
+\f3\b\fs28 \cf0 @Module
+\f2\b0\fs24 - Class annotated with this annotation is called as a Module class. Generally we have dependencies inside this class which will be injected in Component class.\
+\
+
+\f3\b\fs28 @Provides
+\f2\b0\fs24 - This annotation is used to declare dependency in Module class.\
+\
+
+\f3\b\fs28 @Binds
+\f2\b0\fs24 -  This annotation is used to declare dependency in Module class.\
+\
+\pard\pardeftab560\slleading20\pardirnatural\partightenfactor0
+
+\f3\b\fs28 \cf0 @ContributesAndroidInjector(modules =[ ])
+\f2\b0\fs24 - Tells Dagger to generated subComponent of the class which is annotated with @ContributesAndroidInjector. Modules Defines the module classes which own dependencies for the class annotated with @ContributesAndroidInjector. This annotation created subComponent of the class and injects dependencies via module classes mentioned inside modules in @ContributesAndroidInjector annotation. This can be used only on abstract method  inside abstract Module Class\
+\
+
+\f3\b\fs28 @Inject
+\f2\b0 - 
+\fs24 This annotation is used for injecting dependencies\
+\
+\
+\
+
+\f3\b\fs38 Code Explanation -\
+\
+
+\fs30 BaseApplication
+\fs34 - 
+\f2\b0\fs28 Holds the Application Lifetime.
+\f3\b\fs38 \
+\
+
+\fs30 AppComponent
+\fs32  - 
+\f2\b0\fs26 is a Component that contains Modules which will provide dependencies for throughout Application. AppComponent is binds BaseApplication that means AppComponent will survive throughout BaseApplication.\
+Holds Modules such as - AndroidSupportInjectionModule, ActivityBuildersModule, AppModule and ViewModuleFactoryModule.
+\fs28 \
+\
+
+\f3\b\fs30 ActivityBuildersModule- 
+\f2\b0\fs28 This class is abstract and is responsible for creating Activity Components which are called SubComponent.
+\f3\b\fs30  \
+\
+AppModule- 
+\f2\b0\fs26 In This Module class we declare application level dependencies like retrofit instance, Glide Instance etc\
+\
+
+\f3\b\fs28 ViewModelFactoryModule- 
+\f2\b0\fs24 provides ViewModelProviderFactory Dependency.\
+\
+
+\f3\b\fs28 CustomViewModelFactoryProvider- 
+\f2\b0\fs26 This class in combination with ViewModelKey is responsible for providing ViewModel on the basis of Key passed. So it generally created the map of ViewModel and its owner to return a ViewModel with constructor Injection
+\fs24 \
+\
+
+\f3\b\fs30 BaseActivity- 
+\f2\b0\fs26 This is a abstract class which will be extended by all the activities in the project. This class extends DaggerAppCompatActivity. This class can have methods which can be used by all the activities extending it. This class can have abstract methods which can be implemented by child activities as per their  requirements.\
+\
+\
+
+\f3\b\fs30 MainActivity- 
+\f2\b0\fs26 This class is a child class of BaseActivity and has generated SubComponent class  MainActivitySubComponent that is responsible for provides dependencies inside module class such HomeViewModelModule, FragmentBuildersModule and HomeModule.\
+Init() - Used for setting up Navigation Component with BottomNavigationView,\
+setBottomNavBar(id) - sets up BottomNavigationListener for BottomNavigationView. Contains when() statement to switch between fragment depending on the id received.\
+setCurrentFragment(id) - Navigates to Fragment on the basis of id received.\
+\
+
+\f3\b\fs28 FragmentBuildersModule - 
+\f2\b0\fs24  This is abstract module class which is used to create SubComponents for the fragments used in MainActivity I.e. HomeFragment, OrderFragment and AccountFragment. All Of this fragments extends DaggerFragment which helps in creating their corresponding SubComponents. \
+
+\fs26 \
+\
+
+\f3\b\fs28 HomeViewModelModule-
+\f2\b0\fs26  Responsible for providing HomeViewModel with constructor injection.\
+\
+
+\f3\b\fs28 HomeModule
+\fs30 - 
+\f2\b0\fs26 Provides several dependencies For the MainActivity and fragments in FragmentBuildersModule.\
+providesHomeApi() - provides HomeApi Instance.\
+ProvidesBannerAdapter() - provides BannerAdapter Instance\
+ProvidesFoodCategoriesAdapter() - provides FoodCategoriesAdapter Instance
+\fs22 \
+
+\fs26 ProvidesOffersAdapter() - provides OffersAdapter Instance
+\fs22 \
+
+\fs26 ProvidesRestaurantsAdapter() - provides RestaurantsAdapter Instance\
+\
+
+\f3\b\fs28 BannerSection - 
+\f2\b0\fs26 A custom layout for Banner Section\
+
+\f3\b\fs28 \
+FoodCategoriesSection - 
+\f2\b0\fs26 A custom layout for FoodCategories Section\
+\
+
+\f3\b\fs28 OffersSection - 
+\f2\b0\fs24 A custom layout for Offers Section\
+\
+
+\f3\b\fs28 RestaurantsSection - 
+\f2\b0\fs24  A custom layout for Restaurants Seection.\
+\
+
+\f3\b\fs26 VouchersCountSection- 
+\f2\b0\fs24 A custom layout for RestaurantsSection
+\f3\b\fs26  
+\f2\b0\fs22  \
+\
+
+\f3\b\fs28 Resource - 
+\f2\b0\fs24  This  is a generic wrapper class which is responsible for returning status of resins such as Error , Loading and Success. When it is SUCCESS, it has response wrapped inside it.
+\fs26 \
+\
+
+\f3\b\fs30 HomeFragment - 
+\f2\b0\fs26  Used HomeViewModule to get Data from Api and set it in Views.\
+getHomeData() - Responsible for observing the LiveDatais returned from HomeViewModel and sets Data, Loading and Error based on the status returned from response.\
+setUpView(homeData) - Responsible for setting up data on Views.\
+showLoading() - To show loading\
+showError() - To Show Error.\
+getCalculatedWidth() - provides calculated width for dynamic width of View components used in various CustomViews.\
+\
+
+\f3\b\fs30 HomeViewModel
+\f2\b0\fs26 - Provide HomeApi through Constructor injection. There is homeLiveData I.e. instance of MediatorLiveData.\
+getHomeData() - Makes an api call using combination of Retrofit and RxJava and returns Flowable<HomeModel> which is converted to liveData using LiveDataReactiveStream,fromPublisher() which is observed by homeLiveData. homeLiveData instance is returned through this method which is observed in HomeFragment\
+\
+
+\f3\b\fs32 Utils- 
+\f2\b0\fs28  This is a static singleton class.\
+getScreenWidth() - provides full sc reenlisted width.\
+return Color(rating) - returns colour on the basis of rating passed.\
+ \
+\
+
+\f3\b\fs34 Extensions - 
+\f2\b0\fs30 File where we can write extension function for any class. Contains extension methods for setting visibility of View}

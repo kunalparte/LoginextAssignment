@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginStart="6dp"
+    android:layout_marginEnd="6dp"
+    app:cardCornerRadius="10dp"
+    app:strokeColor="@color/black"
+    app:strokeWidth="1dp"
+    app:cardElevation="4dp"
+    app:cardBackgroundColor="@color/white"
+    android:layout_marginBottom="12dp"
+    android:id="@+id/restaurantItemCardView">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/restaurantItemImageCardView"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="0dp"
+        android:layout_marginBottom="8dp">
+
+    <androidx.constraintlayout.utils.widget.ImageFilterView
+        android:layout_width="match_parent"
+        android:layout_height="132dp"
+        android:id="@+id/restaurantItemImageView"
+        android:scaleType="fitXY"
+        android:background="@color/black" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/restaurantItemImageCardView"
+            android:id="@+id/restaurantItemTitleLayout"
+            android:layout_marginBottom="8dp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/restaurantItemTitleTV"
+            tools:text="@string/laura_green"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:letterSpacing="0.1"
+            android:textColor="@color/black"
+            android:gravity="center_vertical|start"
+            android:layout_alignParentStart="true"
+            android:layout_toStartOf="@+id/restaurantItemRatingCardView"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp"/>
+
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/restaurantItemRatingCardView"
+            app:cardCornerRadius="3dp"
+            app:cardElevation="0dp"
+            android:layout_marginEnd="12dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/restaurantItemRatingTV"
+                android:textColor="@color/white"
+                tools:text="4.2"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:layout_gravity="center_vertical"
+                android:drawableStart="@drawable/ic_baseline_star_rate_24"
+                android:drawablePadding="5dp"
+                android:paddingEnd="5dp" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+        </RelativeLayout>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/restaurantItemDurationTV"
+            android:textColor="@color/grey_100"
+            tools:text="30 Mins"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:letterSpacing="0.1"
+            android:layout_marginStart="12dp"
+            android:layout_marginBottom="8dp"
+            android:layout_below="@+id/restaurantItemTitleLayout"
+            android:layout_marginEnd="12dp" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/restaurantItemOffersTV"
+            android:textColor="@color/grey_100"
+            tools:text="Freeship | Near You"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:letterSpacing="0.1"
+            android:layout_marginStart="12dp"
+            android:layout_marginBottom="12dp"
+            android:layout_below="@+id/restaurantItemDurationTV"
+            android:layout_marginEnd="12dp" />
+
+
+    </RelativeLayout>
+
+</com.google.android.material.card.MaterialCardView>

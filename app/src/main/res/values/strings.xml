@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">LoginextAssignment</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="no_orders">No Orders Found</string>
+    <string name="no_account">Account Not Created</string>
+
+    <!--Dummy Texts-->
+    <string name="collections">Collections</string>
+    <string name="freeship">FREESHIP</string>
+    <string name="rice">Rice</string>
+    <string name="laura_green">Laura Green</string>
+    <string name="recommended">Recommended For You</string>
+
+    <!--Bottom Nav Strings-->
+    <string name="home">Home</string>
+    <string name="order">Order</string>
+    <string name="account">Account</string>
+
+    <!--Search-->
+    <string name="search">Search</string>
+</resources>
